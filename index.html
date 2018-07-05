@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OKZ</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        <link rel="stylesheet" href="css/index.css" />
+        <script src="js/uikit.min.js" defer></script>
+        <script src="js/uikit-icons.min.js" defer></script>
+        <script src="js/index.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    </head>
+    <body onload="homePageLoaded()">
+        <div class="uk-position-center" id="home-spinner">
+                <div uk-spinner="ratio: 2"></div>
+        </div>
+        <div id="main" style="display:none">
+        <header style="margin-bottom: 10px">
+            <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; show-on-up: true;">
+            <nav class="uk-navbar uk-navbar-container">
+                <div class="uk-navbar-left" style="height: 65px;">
+                    <a uk-toggle="target: #offcanvas-nav" class="uk-navbar-toggle" href="#">
+                        <span uk-navbar-toggle-icon></span>
+                    </a>
+                </div>
+                <div class="uk-navbar-center">
+                    LOGO DU SITE
+                </div>
+                <div class="uk-navbar-right" style="height: 65px;">
+                    <a uk-toggle="target: #offcanvas-flip" class="uk-navbar-toggle">
+                        <span class="uk-icon uk-icon-image" style="background-image: url(https://goo.gl/qF6Lry); width: 30px; height: 30px;"></span>
+                    </a>
+                </div>
+            </nav>
+            <nav class="uk-navbar-container" uk-navbar>
+                <div class="uk-navbar-center">
+                    <form>
+                        <div class="uk-margin" style="margin-bottom: 9px">
+                            <input class="uk-input uk-form-width-medium uk-form-small" type="text" placeholder="Recherche">
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <!-- canvas content -->
+        <div class="uk-offcanvas-content">
+            <!-- left side           -->
+            <div id="offcanvas-nav" uk-offcanvas="overlay: true">
+                <div class="uk-offcanvas-bar">
+                    <ul class="uk-nav uk-nav-default">
+                        <li class="uk-nav-header">Header</li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
+                    </ul>
+                </div>
+            </div>
+             <!-- right side -->
+            <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                <div class="uk-offcanvas-bar">
+                    <ul class="uk-nav uk-nav-default">
+                        <li class="uk-nav-header">USER NAME</li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span>Profil</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: heart"></span>Favoris</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: comment"></span>Messages</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: settings"></span>Modifications</a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>Deconnecter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </header>
+        <!-- categories slider -->
+        <div style="margin: 20px 10px">
+        <section style="margin-bottom: 10px">
+                <div class="uk-position-relative uk-visible-toggle uk-light" uk-slider="clsActivated: uk-transition-active; center: true">
+                    <ul class="uk-slider-items uk-grid">
+                        <li class="uk-width-3-4" v-for="c in 8">
+                            <div class="uk-panel">
+                                <img src="https://goo.gl/qh9ZFX" alt="">
+                                <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                                    <h3 class="uk-margin-remove">Bottom</h3>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>     
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                </div>
+        </section>
+        <!-- adverts listing  -->
+        <section style="margin-top: 60px">
+            <div 
+                class="ads-listing .uk-grid-small .uk-child-width-auto uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center"
+                uk-height-match="target: > div > .uk-card; row: false"
+                uk-grid>
+                <div v-for="img in images">
+                    <a href="/okz_UI/detail.html">
+                    <div class="uk-card uk-card-default uk-card-small">
+                        <div class="uk-card-media-top">
+                            <img class="card-img" :src="img || 'https://goo.gl/Hnfi2f'" alt="">
+                        </div>
+                        <div class="uk-card-body">
+                            <p class="uk-card-title">Media Top</p>
+                            <p>Lorem ipsum dol.</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="uk-text-center uk-margin">
+                <button class="uk-button uk-button-default" id="loadMore" onclick="loadMore()">Voir plus</button>
+            </div>
+            <div class="uk-text-center uk-margin" style="display: none" id="loadMore-spinner">
+                    <div uk-spinner></div>
+            </div>
+            <div id="sticky" style="text-align: center">
+                <button class="uk-button uk-button-default">AJOUTER UNE ANNONCE</button>
+            </div>
+            <footer>
+                <hr>
+                <div class="uk-text-center">
+                    <small >
+                        © 2018 OKZ version beta 0.01
+                    </small>
+                </div>
+            </footer>
+        </section>
+    </div>
+    </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: '#main',
+            data: {
+                images: ['https://goo.gl/2DXsM5', 'https://goo.gl/Hnfi2f' , 'https://goo.gl/qh9ZFX', 'https://goo.gl/qF6Lry', 'https://goo.gl/ZVgEDX', 'https://goo.gl/CQhSSx', 'https://goo.gl/Tb3MSK', '', 'https://goo.gl/qh9ZFX', 'https://goo.gl/qF6Lry', 'https://goo.gl/ZVgEDX', 'https://goo.gl/CQhSSx','',   'https://goo.gl/qh9ZFX', 'https://goo.gl/qF6Lry', 'https://goo.gl/ZVgEDX']
+            }
+        })
+    </script>
+</html>
