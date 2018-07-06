@@ -140,4 +140,14 @@
             }
         })
     </script>
+    <script>
+        window.onscroll = function(e) {
+            if (this.oldScroll > this.scrollY) {
+                document.getElementById("sticky").className = 'sticky'
+            } else {
+                document.getElementById("sticky").className = 'hideSticky'
+            }
+            this.oldScroll = this.scrollY;
+        }
+    </script>
 </html>

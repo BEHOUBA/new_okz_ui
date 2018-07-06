@@ -17,11 +17,8 @@ function detailPageLoaded() {
     document.getElementById("detail").style.display = 'block'
     document.getElementById("detail-spinner").style.display = 'none'
 }
-window.onscroll = function(e) {
-    if (this.oldScroll > this.scrollY) {
-        document.getElementById("sticky").className = 'sticky'
-    } else {
-        document.getElementById("sticky").className = 'hideSticky'
-    }
-    this.oldScroll = this.scrollY;
+
+function createPageLoaded() {
+    document.getElementById("create").style.display = 'block'
+    document.getElementById("create-spinner").style.display = 'none'
 }

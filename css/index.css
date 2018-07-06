@@ -19,3 +19,8 @@
 .ads-listing a{
     text-decoration: none;
 }
+.preview-img{
+    width:100%;
+    height:100px;
+    object-fit: cover;
+}

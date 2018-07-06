@@ -57,14 +57,10 @@
                 <div class="uk-position-relative uk-visible-toggle uk-light">
                     <ul class="uk-slideshow-items">
                         <li v-for="img in images">
-                            <img :src="img" alt="" uk-cover>
+                            <img :src="img" alt="Image" uk-cover>
                             <div class="uk-position-bottom uk-position-small  uk-position-small">
-                                <a uk-icon="expand" href="#modal-media-image" uk-toggle></a>
-                            </div>
-                            <div id="modal-media-image" class="uk-flex-top" uk-modal>
-                                <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
-                                    <button class="uk-modal-close-outside" type="button" uk-close></button>
-                                    <img :src="img" alt="">
+                                <div uk-lightbox>
+                                    <a uk-icon="expand" :href="img" data-type="image"></a>
                                 </div>
                             </div>
                         </li>
