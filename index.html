@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <title>OKZ</title>
         <meta charset="utf-8">
@@ -36,40 +36,54 @@
             <nav class="uk-navbar-container" uk-navbar>
                 <div class="uk-navbar-center">
                     <form>
-                        <div class="uk-margin" style="margin-bottom: 9px">
-                            <input class="uk-input uk-form-width-medium uk-form-small" type="text" placeholder="Recherche">
+                        <div class="uk-margin uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: search"></span>
+                            <input class="uk-input uk-form-width-medium uk-form-medium" type="text" placeholder="Recherche">
+                            <a href="#modal-full" uk-toggle uk-icon="icon: settings; ratio: 1.5"></a>
                         </div>
                     </form>
                 </div>
             </nav>
         </div>
-        <!-- canvas content -->
-        <div class="uk-offcanvas-content">
-            <!-- left side           -->
-            <div id="offcanvas-nav" uk-offcanvas="overlay: true">
-                <div class="uk-offcanvas-bar">
-                    <ul class="uk-nav uk-nav-default">
-                        <li class="uk-nav-header">Header</li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
-                    </ul>
-                </div>
-            </div>
-             <!-- right side -->
-            <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
-                <div class="uk-offcanvas-bar">
-                    <ul class="uk-nav uk-nav-default">
-                        <li class="uk-nav-header">USER NAME</li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span>Profil</a></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: heart"></span>Favoris</a></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: comment"></span>Messages</a></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: settings"></span>Modifications</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>Deconnecter</a></li>
-                    </ul>
-                </div>
+        <!--Modal for search setting-->
+        <div id="modal-full" class="uk-modal-full" uk-modal>
+            <div class="uk-modal-dialog">
+                <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                <div class="uk-padding uk-width-1-1 uk-text-center uk-margin-auto">
+                        <div class="setting-search" uk-grid>
+                            <div class="uk-width-1-1">
+                                <p>Ville</p>
+                                <select class="uk-select uk-align-right">
+                                    <option>Aucune selection</option>
+                                    <option v-for="ville in villes" :value="ville.name">{{ville.name}}</option>
+                                </select>
+                            </div>
+                            <div class="uk-width-1-1">
+                                <div class="uk-margin uk-grid-small uk-align-center uk-grid">
+                                    <p class="uk-margin">Conditions des articles</p>
+                                    <label><input class="uk-radio" type="radio" name="radio" checked> Toutes</label>
+                                    <label><input class="uk-radio" type="radio" name="radio"> Occasions</label>
+                                    <label><input class="uk-radio" type="radio" name="radio"> Nouveaux</label>
+                                </div>                        
+                            </div>
+                            <div class="uk-width-1-1">
+                                <p>Trier par: </p>
+                                <select class="uk-select uk-align-right">
+                                    <option>Recents</option>
+                                    <option>Prix croissant</option>
+                                    <option>Prix decroissant</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="uk-margin-large-top uk-child-width-expand uk-child-width-1-2" uk-grid>
+                                <div>
+                                    <button class="uk-button uk-button-danger uk-width-1-1">ANNULER</button>
+                                </div>
+                                <div>
+                                    <button class="uk-button uk-button-primary uk-width-1-1">APPLIQUER</button>
+                                </div>
+                            </div>
+                    </div>
             </div>
         </div>
         </header>
@@ -92,43 +106,79 @@
                 </div>
         </section>
         <!-- adverts listing  -->
-        <section style="margin-top: 60px">
-            <div 
-                class="ads-listing .uk-grid-small .uk-child-width-auto uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center"
-                uk-height-match="target: > div > .uk-card; row: false"
-                uk-grid>
-                <div v-for="img in images">
-                    <a href="/okz_UI/detail.html">
-                    <div class="uk-card uk-card-default uk-card-small">
-                        <div class="uk-card-media-top">
-                            <img class="card-img" :src="img || 'https://goo.gl/Hnfi2f'" alt="">
-                        </div>
-                        <div class="uk-card-body">
-                            <p class="uk-card-title">Media Top</p>
-                            <p>Lorem ipsum dol.</p>
+        <main>
+            <section style="margin-top: 60px">
+                <div class="uk-grid-small uk-child-width-expand@" uk-grid>
+                    <div  v-for="c in images" class=" uk-width-1-1 uk-width-1-2@s uk-width-1-4@m">
+                        <div class="uk-card ad-card uk-card-default uk-card-small uk-margin-auto">
+                            <div class="uk-card-media-top uk-inline">
+                                <img :src="c" alt="No image" height="400">
+                                <div class="uk-overlay uk-overlay-default uk-dark uk-position-top">
+                                    <span uk-icon="icon: location; ratio: 0.7"></span><small class="uk-text-bold"> Abidjan</small>
+                                </div>
+                                <div v-if="false" class="uk-overlay uk-overlay-default uk-dark uk-position-bottom">
+                                    <p class="uk-text-bold uk-text-center"> Abidjan</p>
+                                </div>
+                            </div>
+                            <div class="uk-card-badge uk-label"><small>Nouveau</small></div>
+                            <div class="uk-card-body">
+                                <p class="uk-text-small">Lorem ipsum color...</p>
+                                <p class="uk-text-bold">140000 FCFA</p>
+                                <p class="uk-text-right uk-text-small">il y a 1 heure</p>
+                            </div>
                         </div>
                     </div>
-                    </a>
+                </div>
+                <div class="uk-text-center uk-margin">
+                    <button class="uk-button uk-button-default" id="loadMore" onclick="loadMore()">Voir plus</button>
+                </div>
+                <div class="uk-text-center uk-margin" style="display: none" id="loadMore-spinner">
+                        <div uk-spinner></div>
+                </div>
+                <div id="sticky" style="text-align: center">
+                    <a href="/okz_UI/create.html" class="uk-button uk-button-primary">AJOUTER UNE ANNONCE</a>
+                </div>
+                <div id="canvas">
+            <!-- canvas content -->
+            <div class="uk-offcanvas-content">
+                <!-- left side           -->
+                <div id="offcanvas-nav" uk-offcanvas="overlay: true">
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-nav-header">Header</li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
+                        </ul>
+                    </div>
+                </div>
+                 <!-- right side -->
+                <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-nav-header">USER NAME</li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: user"></span>Profil</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: heart"></span>Favoris</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: comment"></span>Messages</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span>Notifications</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>Deconnecter</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="uk-text-center uk-margin">
-                <button class="uk-button uk-button-default" id="loadMore" onclick="loadMore()">Voir plus</button>
-            </div>
-            <div class="uk-text-center uk-margin" style="display: none" id="loadMore-spinner">
-                    <div uk-spinner></div>
-            </div>
-            <div id="sticky" style="text-align: center">
-                <button class="uk-button uk-button-default">AJOUTER UNE ANNONCE</button>
-            </div>
-            <footer>
-                <hr>
-                <div class="uk-text-center">
-                    <small >
-                        © 2018 OKZ version beta 0.01
-                    </small>
                 </div>
-            </footer>
-        </section>
+            </section>
+        </main>
+        <footer>
+            <hr>
+            <div class="uk-text-center">
+                <small >
+                    © 2018 OKZ version beta 0.01
+                </small>
+            </div>
+        </footer>
     </div>
     </div>
     </body>
@@ -136,6 +186,131 @@
         var app = new Vue({
             el: '#main',
             data: {
+                villes: [
+  {
+    "name":"Abidjan"
+  },
+  {
+    "name":"Bouaké"
+  },
+  {
+    "name":"Daloa"
+  },
+  {
+    "name":"Yamoussoukro"
+  },
+  {
+    "name":"San-Pédro"
+  },
+  {
+    "name":"Divo"
+  },
+  {
+    "name":"Divo"
+  },
+  {
+    "name":"Korhogo"
+  },
+  {
+    "name":"Anyama"
+  },
+  {
+    "name":"Abengourou"
+  },
+  {
+    "name":"Man"
+  },
+  {
+    "name":"Gagnoa"
+  },
+  {
+    "name":"Soubré"
+  },
+  {
+    "name":"Agboville"
+  },
+  {
+    "name":"Dabou"
+  },
+  {
+    "name":"Grand-Bassam"
+  },
+  {
+    "name":"Bouaflé"
+  },
+  {
+    "name":"Issia"
+  },
+  {
+    "name":"Sinfra"
+  },
+  {
+    "name":"Katiola"
+  },
+  {
+    "name":"Bingerville"
+  },
+  {
+    "name":"Adzopé"
+  },
+  {
+    "name":"Séguéla"
+  },
+  {
+    "name":"Bondoukou"
+  },
+  {
+    "name":"Oumé"
+  },
+  {
+    "name":"Ferkessedougou"
+  },
+  {
+    "name":"Dimbokro"
+  },
+  {
+    "name":"Odienné"
+  },
+  {
+    "name":"Duékoué"
+  },
+  {
+    "name":"Danané"
+  },
+  {
+    "name":"Tingréla"
+  },
+  {
+    "name":"Guiglo"
+  },
+  {
+    "name":"Boundiali"
+  },
+  {
+    "name":"Agnibilékrou"
+  },
+  {
+    "name":"Daoukro"
+  },
+  {
+    "name":"Vavoua"
+  },
+  {
+    "name":"Zuénoula"
+  },
+  {
+    "name":"Tiassalé"
+  },
+  {
+    "name":"Toumodi"
+  },
+  {
+    "name":"Akoupé"
+  },
+  {
+    "name":"Lakota"
+  }
+],
                 images: ['https://goo.gl/2DXsM5', 'https://goo.gl/Hnfi2f' , 'https://goo.gl/qh9ZFX', 'https://goo.gl/qF6Lry', 'https://goo.gl/ZVgEDX', 'https://goo.gl/CQhSSx', 'https://goo.gl/Tb3MSK', '', 'https://goo.gl/qh9ZFX', 'https://goo.gl/qF6Lry', 'https://goo.gl/ZVgEDX', 'https://goo.gl/CQhSSx','',   'https://goo.gl/qh9ZFX', 'https://goo.gl/qF6Lry', 'https://goo.gl/ZVgEDX']
             }
         })
